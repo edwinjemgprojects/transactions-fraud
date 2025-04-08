@@ -1,0 +1,149 @@
+{
+  "name": "Transaction-Service",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Create",
+      "filename": "Create.bru",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:8083/transaction",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"id\": 106,\n  \"accountNumber\": \"0000152810\",\n  \"transactionType\": 1,\n  \"amount\": 2900.50,\n  \"transactionTime\": \"2025-04-07 13:12:15.504\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "getDeleteById",
+      "filename": "getDeleteById.bru",
+      "seq": 6,
+      "request": {
+        "url": "http://localhost:8083/transaction/101",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "getTransactionByAccounNumber",
+      "filename": "getTransactionByAccounNumber.bru",
+      "seq": 5,
+      "request": {
+        "url": "http://localhost:8083/transaction/account/0000152805",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "getTransactionById",
+      "filename": "getTransactionById.bru",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8083/transaction/105",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "getTransactions",
+      "filename": "getTransactions.bru",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:8083/transaction",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "Transaction-Service",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0010080337524414062,
+    "filesCount": 6
+  }
+}
