@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.client.HttpServerErrorException;
+//import com.deutsche.transaction.exceptions.InternalServerException;
+//import com.deutsche.transaction.entities.ErrorResponse;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,17 +24,35 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping
+    //@ExceptionHandler(InternalServerException.class)
     public ResponseEntity<Transaction> saveTransaction(@RequestBody Transaction transaction){
-        Transaction trxNew = transactionService.createTransaction(transaction);
-        HttpHeaders headers = new HttpHeaders();
-        if(trxNew != null){
-            headers.add("Status", "Transaction saved.");
-            return new ResponseEntity<>(trxNew, headers, HttpStatus.ACCEPTED);
-        }else{
-            headers.add("Status", "Account exceeds a predefined threshold.");
-            return new ResponseEntity<>(null, headers, HttpStatus.NOT_IMPLEMENTED);
+        try {
+            Transaction trxNew = transactionService.createTransaction(transaction);
+            //System.out.println("emg10");
+            //System.out.println(trxNew);
+            HttpHeaders headers = new HttpHeaders();
+            if (trxNew != null) {
+                headers.add("Status", "Transaction saved.");
+                return new ResponseEntity<>(trxNew, headers, HttpStatus.CREATED);
+            } else {
+                headers.add("Status", "Account exceeds a predefined threshold.");
+                return new ResponseEntity<>(null, headers, HttpStatus.NOT_IMPLEMENTED);
+            }
+            //return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transaction));
+            //return null;
+        }catch(Exception e){
+            //throw new InternalServerErrorException("An internal server error ocurred.");
+            //ErrorResponse httpError = new ErrorResponse(LocalDateTime.now(), e.getMessage() , "Internal Server Error"));
+                    /*
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse(LocalDateTime.now(), "Internal Server Error"));
+*/
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Status", "Internal Server Error, contact TI.");
+            return new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        //return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transaction));
+
+
     }
 
     @GetMapping
@@ -37,7 +60,7 @@ public class TransactionController {
         //return ResponseEntity.ok(transactionService.getTransactions());
         HttpHeaders headers = new HttpHeaders();
         headers.add("Status", "OK");
-        return new ResponseEntity<>(transactionService.getTransactions(), headers, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(transactionService.getTransactions(), headers, HttpStatus.OK);
     }
 
     @GetMapping("/{transactionId}")
@@ -67,5 +90,7 @@ public class TransactionController {
     public ResponseEntity<List<Transaction>> getTransactionByAccountNumberAndGreaterDate(@PathVariable String accountNumber){
         return ResponseEntity.ok(transactionService.getTransactionByAccountNumberAndGreaterDate(accountNumber));
     }
+
+
 
 }

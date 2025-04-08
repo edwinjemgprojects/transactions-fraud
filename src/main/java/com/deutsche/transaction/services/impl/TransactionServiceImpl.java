@@ -29,7 +29,7 @@ public class TransactionServiceImpl implements TransactionService {
         if(validate24Hours){
             return transactionRepository.save(transaction);
         }
-        System.out.println("emg590: Supero el monto permitido");
+        //System.out.println("emg590: Supero el monto permitido");
         return null;
     }
 
@@ -60,6 +60,7 @@ public class TransactionServiceImpl implements TransactionService {
                 //System.out.println("emg150: " + secondsPassed);
             }
             return trx;
+
             //System.out.println("emg160: " + secondsPassed);
         }
         return null;
@@ -84,7 +85,7 @@ public class TransactionServiceImpl implements TransactionService {
         for(Transaction trx: lstTransactions){
             sumAmount += trx.getAmount();
         }
-        //System.out.println("emg180: " + sumAmount);
+        System.out.println("emg180: " + sumAmount);
         //System.out.println("emg200: " + minimunAmount);
 
         if(sumAmount > minimunAmount){

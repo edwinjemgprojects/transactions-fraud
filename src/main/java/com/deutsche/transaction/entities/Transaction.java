@@ -1,8 +1,5 @@
 package com.deutsche.transaction.entities;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.deutsche.transaction.utils.utils;
@@ -13,18 +10,19 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Document("transactions")
 public class Transaction {
     @Id
     private int id;
-
+/*
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public String getAccountNumber() {
         return accountNumber;
@@ -57,7 +55,7 @@ public class Transaction {
     public void setTransactionTime(String transactionTime) {
         LocalDateTime ldt = LocalDateTime.now();
         this.transactionTime = utils.getFormatDate(ldt);
-//        setMilliTransactionTime(utils.getMilliSeconds(ldt));
+        //setMilliTransactionTime(utils.getMilliSeconds(ldt));
         this.milliTransactionTime = utils.getMilliSeconds(ldt);
         //this.transactionTime = transactionTime;
         //this.transactionTime = LocalDateTime.now().toString();
@@ -68,6 +66,7 @@ public class Transaction {
     private double amount;
     private String transactionTime;
 
+    private Long milliTransactionTime;
     public Long getMilliTransactionTime() {
         return milliTransactionTime;
     }
@@ -76,5 +75,5 @@ public class Transaction {
         this.milliTransactionTime = milliTransactionTime;
     }
 */
-    private Long milliTransactionTime;
+
 }
