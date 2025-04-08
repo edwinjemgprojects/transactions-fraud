@@ -5,5 +5,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017
-      database: fraud
+      database: transaction
+      user: root
+      password: secret
 
