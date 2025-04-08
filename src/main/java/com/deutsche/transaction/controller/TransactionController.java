@@ -85,12 +85,12 @@ public class TransactionController {
         return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
         //return ResponseEntity.ok(transactionService.deleteTransactionById(id));
     }
-
+/*
     @GetMapping("/accountGreaterDate/{accountNumber}")
     public ResponseEntity<List<Transaction>> getTransactionByAccountNumberAndGreaterDate(@PathVariable String accountNumber){
         return ResponseEntity.ok(transactionService.getTransactionByAccountNumberAndGreaterDate(accountNumber));
     }
-
+*/
 
 
 }

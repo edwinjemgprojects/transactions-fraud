@@ -2,15 +2,26 @@ package com.deutsche.transaction.entities;
 
 import java.time.LocalDateTime;
 
-public class ErrorResponse {
+public class ErrorDetail {
     private LocalDateTime timestamp;
     private String message;
-    private String details;
 
-    public ErrorResponse(LocalDateTime timestamp, String message, String details) {
+    public ErrorDetail(LocalDateTime timestamp, String message, String details, String errorCode) {
         this.timestamp = timestamp;
         this.message = message;
         this.details = details;
+        this.errorCode = errorCode;
+    }
+
+    private String details;
+    private String errorCode;
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     public LocalDateTime getTimestamp() {

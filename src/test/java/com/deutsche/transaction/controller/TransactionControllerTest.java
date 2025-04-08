@@ -4,6 +4,7 @@ import com.deutsche.transaction.entities.Transaction;
 import com.deutsche.transaction.services.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class TransactionControllerTest {
 
     @Test
     @Order(1)
+    @DisplayName("Save transaction and apply rule")
     void testSaveTransaction() throws Exception{
         Transaction trx = Transaction.builder()
                 .id(130)
@@ -64,7 +66,7 @@ public class TransactionControllerTest {
         //when
         ResultActions response = mockMvc.perform(post("/transaction")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(null)));
+                .content(objectMapper.writeValueAsString(trx)));
 
         //then
         response.andDo(print())
@@ -79,6 +81,7 @@ public class TransactionControllerTest {
 
     @Test
     @Order(2)
+    @DisplayName("Get all transactions")
     void testGetTransaction() throws Exception {
         List<Transaction> lstTrx = new ArrayList<>();
         lstTrx.add(Transaction.builder().id(130).accountNumber("0000200000").transactionType(1).amount(3050.25).transactionTime("2025-04-07 13:12:15.504").milliTransactionTime(1744088619971L).build());
@@ -95,11 +98,11 @@ public class TransactionControllerTest {
         response.andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.size()", is(lstTrx.size())));
-
     }
 
     @Test
     @Order(3)
+    @DisplayName("Get transaction by Id")
     void testGetTransactionById() throws Exception {
         int id = 150;
         Transaction trx = Transaction.builder()
@@ -128,6 +131,7 @@ public class TransactionControllerTest {
 
     @Test
     @Order(4)
+    @DisplayName("Get transaction by account and apply rule")
     void testGetTransactionByAccountNumber() throws Exception {
         String accountNumber = "0000200002";
         List<Transaction> lstTrx = new ArrayList<>();
@@ -150,6 +154,7 @@ public class TransactionControllerTest {
     @Disabled
     @Test
     @Order(5)
+    @DisplayName("Delete transaction by Id")
     void testDeleteTransactionById() throws Exception {
         int id = 150;
 
